@@ -33,6 +33,10 @@ const __dirname=path.dirname(__filename)
 dotenv.config();//invoking .envfile
 
 const app=express()//invoking express application
+app.get('/', (req, res)=>{
+    return 'API working'
+})
+
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({
@@ -47,7 +51,9 @@ app.use(bodyParser.urlencoded({
     limit:"30mb",
     extended:true
 }))
-app.use(cors())
+app.use(cors({
+    origin : '*'
+}))
 app.use("/assets",express.static(path.join(__dirname,'public/assets')));//set directory for our assets file like images
 // ! Configuration
 
